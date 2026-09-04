@@ -3,9 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Game Wishlist</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+    <header>
+        <h1>Game Wishlist</h1>
+        <div class="search-box">
+            <input type="text" placeholder="Введіть назву гри...">
+        </div>
+        <div class="header-right">
+            <button class="btn btn-login">Log In</button>
+            <button class="btn btn-signup">Sign up</button>
+        </div>    
+    </header>
+
+    <div class="page-layout">
+        <aside class="filter-sidebar">
+            <h2>Filters</h2>
+
+            <div class="filters-group">
+                <h3>Genre</h3>
+                <label><input type="checkbox" value="action">Action</label>
+                <label><input type="checkbox" value="RPG">RPG</label>
+                <label><input type="checkbox" value="Strategy">Strategy</label>
+                <label><input type="checkbox" value="Adventure">Adventure</label>
+            </div>
+
+            <div class="filters-group">
+                <h3>Platform</h3>
+                <label><input type="checkbox" value="PC">PC</label>
+                <label><input type="checkbox" value="PlayStation">PlayStation</label>
+                <label><input type="checkbox" value="Xbox">Xbox</label>
+                <label><input type="checkbox" value="Nintendo">Nintendo</label>
+            </div>
+
+            <div class="filters-group">
+                <h3>Sort by</h3>
+                <select id="sort-select">
+                    <option value="popular">Most popular</option>
+                    <option value="release-date">Release date</option>
+                    <option value="rating">Top Rated</option>
+                    <option value="name">Name (A-Z)</option>
+                </select>
+            </div>
+        </aside>
+
+        <div class="main-container">
+            <h2>All games</h2>
+            <div class="games-container">
+
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
