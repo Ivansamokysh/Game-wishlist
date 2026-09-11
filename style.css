@@ -204,7 +204,12 @@ body{
 }
 
 .main-container {
-  flex: 1;
+  display: flex;
+  
+  gap: 15px;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-container h2 {
@@ -465,4 +470,113 @@ body{
 .modal-content button[type="submit"]:hover {
   background-color: #6d44e2;
   box-shadow: 0 4px 12px rgba(127, 90, 240, 0.35);
+}
+
+.game-modal-content {
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.game-modal-banner {
+  width: 100%;
+  height: 250px; 
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.game-modal-title {
+  font-size: 24px;
+  color: #fffffe;
+  margin-bottom: 12px;
+}
+
+.game-modal-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  color: #94a1b2;
+  font-size: 14px;
+}
+
+.game-modal-description {
+  line-height: 1.6;
+  color: #fffffe;
+  font-size: 15px;
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.clickable-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.clickable-card * {
+  pointer-events: none;
+}
+
+#gameModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameModal.active {
+  display: flex !important;
+}
+
+.game-modal-content {
+  position: relative;
+  background-color: #16161a;
+  border: 1px solid #242629;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 650px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.game-modal-banner {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+.game-modal-title {
+  font-size: 26px;
+  color: #fffffe;
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.game-modal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  color: #94a1b2;
+  font-size: 14px;
+}
+
+.game-modal-description {
+  line-height: 1.6;
+  color: #abd1c6;
+  font-size: 14px;
 }

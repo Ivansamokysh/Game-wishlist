@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     games.forEach(game => {
       const gameCard = document.createElement('div');
-      gameCard.className = 'game-card';
+      gameCard.className = 'game-card clickable-card';
+      gameCard.setAttribute('data-game-id', game.id);
 
       const coverImage = game.background_image 
         ? game.background_image 
@@ -229,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function loginUser(name) {
+    localStorage.setItem('userName', name);
+
     if (loginBtn) loginBtn.style.display = 'none';
     if (signupBtn) signupBtn.style.display = 'none';
     if (userProfile) userProfile.style.display = 'flex';
@@ -236,11 +239,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function logoutUser() {
+    localStorage.removeItem('userName');
+
     if (loginBtn) loginBtn.style.display = 'inline-block';
     if (signupBtn) signupBtn.style.display = 'inline-block';
     if (userProfile) userProfile.style.display = 'none';
     if (dropdownMenu) dropdownMenu.classList.remove('active');
     if (dropdownToggle) dropdownToggle.classList.remove('open');
+  }
+
+  const savedUser = localStorage.getItem('userName');
+  if (savedUser) {
+    loginUser(savedUser);
   }
 
   const loginForm = document.getElementById('loginForm');
@@ -290,4 +300,54 @@ document.addEventListener('DOMContentLoaded', () => {
       logoutUser();
     });
   }
+
+  async function fetchGameDetails(gameId) {
+    const modalDetails = document.getElementById('gameModalDetails');
+    const gameModal = document.getElementById('gameModal');
+
+    console.log('click', gameId)
+
+    if (!modalDetails || !gameModal) return;
+
+    modalDetails.innerHTML = '<p style="color: #94a1b2;">Завантаження деталей гри...</p>';
+    gameModal.classList.add('active');
+
+    try {
+      const response = await fetch('https://api.rawg.io/api/games/${gameId}?key=${250ff70572f54c47ba15fc8fa203da58}')
+      if (!response.ok) {
+        throw new Error(`Помилка запиту: ${response.status}`);
+      }
+
+      const game = await response.json();
+
+      modalDetails.innerHTML = `
+        <img src="${game.background_image}" alt="${game.name}" class="game-modal-banner" />
+        <h2 class="game-modal-title">${game.name}</h2>
+        <div class="game-modal-meta">
+          <span>⭐ ${game.rating} / 5</span>
+          <span>🎮Genres: ${game.genres.map(g => g.name).join(', ')}</span>
+          <span>📅Released: ${game.released}</span>
+        </div>
+        <div class="game-modal-description">
+          ${game.description_raw} 
+        </div>
+      `;
+    } catch (error) {
+      console.error('Помилка при отриманні деталей гри:', error);
+      modalDetails.innerHTML = '<p style="color: #ff5c5c;">Не вдалося завантажити деталі гри.</p>';
+    }
+  }
+
+  document.addEventListener('click', (e) => {
+    if (e.target.hasAttribute('data-close') || e.target.closest('[data-close]')) {
+      const activeModal = e.target.closest('.modal-overlay');
+      if (activeModal) {
+        activeModal.classList.remove('active');
+      }
+    }
+
+    if (e.target.classList.contains('modal-overlay')) {
+      e.target.classList.remove('active');
+    }
+  })
 });
