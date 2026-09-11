@@ -219,7 +219,6 @@ body{
   gap: 24px;
 }
 
-/* Окрема картка гри (якщо додаватиметься через JS) */
 .game-card {
   background-color: #16161a;
   border: 1px solid #242629;
@@ -233,4 +232,237 @@ body{
 .game-card:hover {
   transform: translateY(-6px);
   border-color: #7f5af0;
+}
+
+.page-layout {
+  display: flex;
+  gap: 28px;
+  padding: 32px;
+  max-width: 1800px;
+  margin: 0;
+  width: 100%;
+  align-items: flex-start; 
+}
+
+.modal-overlay {
+  display: none !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.active {
+  display: flex !important;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-right .btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: none;
+  outline: none;
+}
+
+.header-right .btn-login {
+  background-color: transparent;
+  color: #fffffe;
+  border: 1px solid #72757e;
+}
+
+.header-right .btn-login:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #fffffe;
+}
+
+.header-right .btn-signup {
+  background-color: #7f5af0;
+  color: #fffffe;
+}
+
+.header-right .btn-signup:hover {
+  background-color: #6d44e2;
+  box-shadow: 0 4px 12px rgba(127, 90, 240, 0.35);
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #16161a;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid #2cb67d;
+}
+
+.user-name {
+  color: #fffffe;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: #94a1b2;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  color: #fffffe;
+}
+
+.dropdown-toggle.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #16161a;
+  border: 1px solid #72757e;
+  border-radius: 8px;
+  padding: 6px;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+.dropdown-item {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 92, 92, 0.12);
+}
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.active {
+  display: flex !important;
+}
+
+.modal-content {
+  position: relative;
+  background-color: #16161a;
+  border: 1px solid #242629;
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  color: #fffffe;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 24px;
+  color: #94a1b2;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #fffffe;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #010101;
+  border: 1px solid #72757e;
+  border-radius: 8px;
+  color: #fffffe;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content input::placeholder {
+  color: #94a1b2;
+}
+
+.modal-content input:focus {
+  border-color: #7f5af0;
+  box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.25);
+}
+
+.modal-content button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background-color: #7f5af0;
+  color: #fffffe;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #6d44e2;
+  box-shadow: 0 4px 12px rgba(127, 90, 240, 0.35);
 }
