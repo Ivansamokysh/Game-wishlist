@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     games.forEach(game => {
       const gameCard = document.createElement('div');
       gameCard.className = 'game-card clickable-card';
-      gameCard.setAttribute('data-game-id', game.id);
+      gameCard.setAttribute('data-id', game.id);
 
       const coverImage = game.background_image 
         ? game.background_image 
@@ -151,6 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Пошук та фільтри
   if (searchInput) {
     searchInput.addEventListener('input', () => {
       clearTimeout(searchTimeout);
@@ -187,6 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchGamesFromApi();
 
+  // Авторизація та інтерфейс користувача
   const loginBtn = document.querySelector('header .btn-login') || document.querySelector('.btn-login');
   const signupBtn = document.querySelector('header .btn-signup') || document.querySelector('.btn-signup');
   const loginModal = document.getElementById('loginModal');
@@ -211,23 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
       signupModal.classList.add('active');
     });
   }
-
-  document.querySelectorAll('[data-close]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const modal = e.target.closest('.modal-overlay');
-      if (modal) modal.classList.remove('active');
-    });
-  });
-
-  [loginModal, signupModal].forEach(modal => {
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-        }
-      });
-    }
-  });
 
   function loginUser(name) {
     localStorage.setItem('userName', name);
@@ -288,66 +273,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  document.addEventListener('click', (e) => {
-    if (userProfile && !userProfile.contains(e.target)) {
-      if (dropdownMenu) dropdownMenu.classList.remove('active');
-      if (dropdownToggle) dropdownToggle.classList.remove('open');
-    }
-  });
-
   if (exitBtn) {
     exitBtn.addEventListener('click', () => {
       logoutUser();
     });
   }
 
+  // Деталі гри (Modal)
   async function fetchGameDetails(gameId) {
-    const modalDetails = document.getElementById('gameModalDetails');
     const gameModal = document.getElementById('gameModal');
+    const modalDetails = document.getElementById('gameModalDetails');
 
-    console.log('click', gameId)
+    if (!gameModal || !modalDetails) return;
 
-    if (!modalDetails || !gameModal) return;
-
-    modalDetails.innerHTML = '<p style="color: #94a1b2;">Завантаження деталей гри...</p>';
+    modalDetails.innerHTML = '<p style="color: #94a1b2; text-align: center; padding: 40px;">Завантаження...</p>';
     gameModal.classList.add('active');
 
     try {
-      const response = await fetch('https://api.rawg.io/api/games/${gameId}?key=${250ff70572f54c47ba15fc8fa203da58}')
-      if (!response.ok) {
-        throw new Error(`Помилка запиту: ${response.status}`);
-      }
+      const response = await fetch(`${BASE_URL}/${gameId}?key=${API_KEY}`);
+      if (!response.ok) throw new Error('Помилка завантаження даних');
 
       const game = await response.json();
 
       modalDetails.innerHTML = `
-        <img src="${game.background_image}" alt="${game.name}" class="game-modal-banner" />
+        <img src="${game.background_image || 'https://via.placeholder.com/600x300'}" alt="${game.name}" class="game-modal-banner" />
         <h2 class="game-modal-title">${game.name}</h2>
         <div class="game-modal-meta">
-          <span>⭐ ${game.rating} / 5</span>
-          <span>🎮Genres: ${game.genres.map(g => g.name).join(', ')}</span>
-          <span>📅Released: ${game.released}</span>
+          <span>⭐ Рейтинг: ${game.rating || 'N/A'} / 5</span>
+          <span>📅 Дата релізу: ${game.released || 'N/A'}</span>
+          <span>🎮 Жанри: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}</span>
         </div>
         <div class="game-modal-description">
-          ${game.description_raw} 
+          ${game.description || '<p>Опис відсутній.</p>'}
         </div>
       `;
     } catch (error) {
-      console.error('Помилка при отриманні деталей гри:', error);
-      modalDetails.innerHTML = '<p style="color: #ff5c5c;">Не вдалося завантажити деталі гри.</p>';
+      console.error(error);
+      modalDetails.innerHTML = '<p style="color: #ff5c5c; text-align: center; padding: 40px;">Не вдалося завантажити інформацію про гру.</p>';
     }
   }
 
+  // Єдиний глобальний обробник кліків
   document.addEventListener('click', (e) => {
-    if (e.target.hasAttribute('data-close') || e.target.closest('[data-close]')) {
-      const activeModal = e.target.closest('.modal-overlay');
-      if (activeModal) {
-        activeModal.classList.remove('active');
-      }
+    // Відкриття картки гри
+    const card = e.target.closest('.game-card');
+    if (card) {
+      const gameId = card.getAttribute('data-id');
+      if (gameId) fetchGameDetails(gameId);
+      return;
     }
 
+    // Закриття через хрестик
+    if (e.target.hasAttribute('data-close') || e.target.closest('[data-close]')) {
+      const activeModal = e.target.closest('.modal-overlay');
+      if (activeModal) activeModal.classList.remove('active');
+      return;
+    }
+
+    // Закриття через клік по затемненому фону (overlay)
     if (e.target.classList.contains('modal-overlay')) {
       e.target.classList.remove('active');
+      return;
     }
-  })
+
+    // Закриття меню профілю при кліку поза ним
+    if (userProfile && !userProfile.contains(e.target)) {
+      if (dropdownMenu) dropdownMenu.classList.remove('active');
+      if (dropdownToggle) dropdownToggle.classList.remove('open');
+    }
+  });
+
 });
