@@ -1,124 +1,249 @@
-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 32px;
-    background-color: #121212;
-    color: white;
+/* ==========================================
+   1. СКИДАННЯ ТА БАЗОВІ СТИЛІ
+   ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.search-box{
-    position: relative;
-    max-width: 420px;
-    width: 100%;
-    padding: 10px 16px;
-    border-radius: 14px;
-    border: 1px solid #211f1f;
-    background-color: #010101;
-    color: white;
-    font-size: 14px;
-    transition: all 0.3s ease;
+body {
+  background-color: #0f0f13;
+  color: #fffffe;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
 }
 
-.search-box input{
-    width: 100%;
-    padding: 12px 20px 12px 42px;
-    border-radius: 25px;
-    border: 2px solid #242629;
-    background-color: #010101;
-    color: #fffffe;
-    font-size: 14px;
-    box-sizing: border-box;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+/* Кастомний скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f13;
+}
+::-webkit-scrollbar-thumb {
+  background: #242629;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7f5af0;
 }
 
-.search-box input:hover{
-    border-color: #383a40;
-    background-color: #0b0b0e;
+/* ==========================================
+   2. ШАПКА (HEADER)
+   ========================================== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: #121212;
+  color: white;
+  border-bottom: 1px solid #242629;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.search-box input:focus{
-    border-color: #7f5af0;
-    background-color: #121217;
-    box-shadow: 0 0 15px rgba(127, 90, 240, 0.4);
+.search-box {
+  position: relative;
+  max-width: 420px;
+  width: 100%;
 }
 
-.search-box input::placeholder{
-    color: #94a1b2;
+.search-box input {
+  width: 100%;
+  padding: 10px 20px 10px 40px;
+  border-radius: 25px;
+  border: 2px solid #242629;
+  background-color: #010101;
+  color: #fffffe;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn{
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-    border: 2px solid transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+.search-box input:hover {
+  border-color: #383a40;
+  background-color: #0b0b0e;
 }
 
-.btn-login{
-    background-color: transparent;
-    color: #fffffe;
-    border-color: #242629;
+.search-box input:focus {
+  border-color: #7f5af0;
+  background-color: #121217;
+  box-shadow: 0 0 15px rgba(127, 90, 240, 0.4);
 }
 
-.btn-login:hover{
-    border-color: #7f5af0;
-    color: #7f5af0;
-    background-color: rgba(127, 90, 240, 0.08);
-    box-shadow: 0 0 12px rgba(127, 90, 240, 0.2);
+.search-box input::placeholder {
+  color: #94a1b2;
 }
 
-.btn-login:active{
-    transform: scale(0.96);
+.search-box::before {
+  content: '🔍';
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
-.btn-signup{
-    background-color: #7f5af0;
-    color: #fffffe;
+/* Кнопки авторизації */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.btn-signup:hover{
-    background-color: #6d44e4;
-    box-shadow: 0 0 15px rgba(127, 90, 240, 0.5);
+.btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-signup:active{
-    transform: sclae(0.96);
+.btn-login {
+  background-color: transparent;
+  color: #fffffe;
+  border-color: #242629;
 }
 
-body{
-    background-color: #0f0f13;
-    color: #fffffe;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    line-height: 1.5;
+.btn-login:hover {
+  border-color: #7f5af0;
+  color: #7f5af0;
+  background-color: rgba(127, 90, 240, 0.08);
+  box-shadow: 0 0 12px rgba(127, 90, 240, 0.2);
 }
 
-.filter-sidebar{
-    width: 260px;
-    flex-shrink: 0;
-    margin: 20px;
-    background-color: #16161a;
-    border: 1px solid #242629;
-    border-radius: 12px;
-    padding: 24px 20px;
-    height: fit-content;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.btn-login:active,
+.btn-signup:active {
+  transform: scale(0.96);
 }
 
-.filter-sidebar h2{
-    font-size: 20px;
-    font-weight: 700;
-    color: #fffffe;
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #242629;
-    letter-spacing: 0.5px;
+.btn-signup {
+  background-color: #7f5af0;
+  color: #fffffe;
+}
+
+.btn-signup:hover {
+  background-color: #6d44e4;
+  box-shadow: 0 0 15px rgba(127, 90, 240, 0.5);
+}
+
+/* Профіль користувача */
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #16161a;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid #2cb67d;
+}
+
+.user-name {
+  color: #fffffe;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  color: #94a1b2;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-toggle:hover {
+  color: #fffffe;
+}
+
+.dropdown-toggle.open {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #16161a;
+  border: 1px solid #242629;
+  border-radius: 8px;
+  padding: 6px;
+  min-width: 140px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+.dropdown-item {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #ff5c5c;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 92, 92, 0.12);
+}
+
+/* ==========================================
+   3. ОСНОВНЕ РОЗМІЩЕННЯ (LAYOUT & SIDEBAR)
+   ========================================== */
+.page-layout {
+  display: flex;
+  gap: 28px;
+  padding: 32px;
+  max-width: 1800px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.filter-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  background-color: #16161a;
+  border: 1px solid #242629;
+  border-radius: 12px;
+  padding: 24px 20px;
+  height: fit-content;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 90px;
+}
+
+.filter-sidebar h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fffffe;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #242629;
+  letter-spacing: 0.5px;
 }
 
 .filters-group {
@@ -130,7 +255,7 @@ body{
 }
 
 .filters-group h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #94a1b2;
   text-transform: uppercase;
@@ -203,13 +328,12 @@ body{
   border-color: #7f5af0;
 }
 
+/* ==========================================
+   4. КОНТЕЙНЕР ІГОР ТА СІТКА (GRID)
+   ========================================== */
 .main-container {
-  display: flex;
-  
-  gap: 15px;
-  padding: 20px;
-  flex-direction: column;
-  align-items: center;
+  flex-grow: 1;
+  width: 100%;
 }
 
 .main-container h2 {
@@ -220,8 +344,9 @@ body{
 
 .games-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  width: 100%;
 }
 
 .game-card {
@@ -231,149 +356,85 @@ body{
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-card:hover {
   transform: translateY(-6px);
   border-color: #7f5af0;
+  box-shadow: 0 8px 24px rgba(127, 90, 240, 0.25);
 }
 
-.page-layout {
-  display: flex;
-  gap: 28px;
-  padding: 32px;
-  max-width: 1800px;
-  margin: 0;
+.game-card * {
+  pointer-events: none;
+}
+
+.game-card .game-cover {
   width: 100%;
-  align-items: flex-start; 
+  height: 180px;
+  object-fit: cover;
 }
 
-.modal-overlay {
-  display: none !important;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-overlay.active {
-  display: flex !important;
-}
-
-.header-right {
+.game-card .game-info {
+  padding: 16px;
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
 }
 
-.header-right .btn {
-  padding: 10px 20px;
-  border-radius: 8px;
+.game-card .game-info h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fffffe;
+  line-height: 1.3;
+}
+
+.game-card .game-info p {
+  font-size: 12px;
+  color: #94a1b2;
+}
+
+.game-card .genre-tag {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: auto;
+  background-color: rgba(127, 90, 240, 0.15);
+  color: #7f5af0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
   font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  border: none;
-  outline: none;
+  border: 1px solid rgba(127, 90, 240, 0.3);
 }
 
-.header-right .btn-login {
+#load-more-btn {
+  display: block;
+  margin: 30px auto 0 auto;
+  padding: 12px 32px;
   background-color: transparent;
   color: #fffffe;
-  border: 1px solid #72757e;
-}
-
-.header-right .btn-login:hover {
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: #fffffe;
-}
-
-.header-right .btn-signup {
-  background-color: #7f5af0;
-  color: #fffffe;
-}
-
-.header-right .btn-signup:hover {
-  background-color: #6d44e2;
-  box-shadow: 0 4px 12px rgba(127, 90, 240, 0.35);
-}
-
-.user-profile {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background-color: #16161a;
-  padding: 6px 14px;
-  border-radius: 10px;
-  border: 1px solid #2cb67d;
-}
-
-.user-name {
-  color: #fffffe;
+  border: 2px solid #7f5af0;
+  border-radius: 25px;
+  font-size: 14px;
   font-weight: 600;
-  font-size: 14px;
-}
-
-.dropdown-toggle {
-  background: none;
-  border: none;
-  color: #94a1b2;
-  font-size: 12px;
   cursor: pointer;
-  padding: 4px;
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-.dropdown-toggle:hover {
-  color: #fffffe;
+#load-more-btn:hover {
+  background-color: #7f5af0;
+  box-shadow: 0 0 15px rgba(127, 90, 240, 0.4);
 }
 
-.dropdown-toggle.open {
-  transform: rotate(180deg);
+#load-more-btn:active {
+  transform: scale(0.96);
 }
 
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  background-color: #16161a;
-  border: 1px solid #72757e;
-  border-radius: 8px;
-  padding: 6px;
-  min-width: 130px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-}
-
-.dropdown-menu.active {
-  display: block;
-}
-
-.dropdown-item {
-  width: 100%;
-  background: none;
-  border: none;
-  color: #ff5c5c;
-  padding: 8px 12px;
-  text-align: left;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.dropdown-item:hover {
-  background-color: rgba(255, 92, 92, 0.12);
-}
+/* ==========================================
+   5. МОДАЛЬНІ ВІКНА (MODALS)
+   ========================================== */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -381,15 +442,18 @@ body{
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .modal-overlay.active {
-  display: flex !important;
+  display: flex;
+  opacity: 1;
 }
 
 .modal-content {
@@ -398,10 +462,16 @@ body{
   border: 1px solid #242629;
   border-radius: 16px;
   padding: 32px;
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
   color: #fffffe;
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
 }
 
 .modal-content h2 {
@@ -418,11 +488,12 @@ body{
   font-size: 24px;
   color: #94a1b2;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .close-btn:hover {
-  color: #fffffe;
+  color: #ff5c5c;
+  transform: scale(1.15) rotate(90deg);
 }
 
 .modal-content form {
@@ -435,12 +506,11 @@ body{
   width: 100%;
   padding: 12px 16px;
   background-color: #010101;
-  border: 1px solid #72757e;
+  border: 1px solid #242629;
   border-radius: 8px;
   color: #fffffe;
   font-size: 14px;
   outline: none;
-  box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -472,83 +542,66 @@ body{
   box-shadow: 0 4px 12px rgba(127, 90, 240, 0.35);
 }
 
+/* ==========================================
+   6. СТИЛІЗАЦІЯ МОДАЛЬНОГО ВІКНА ГРИ
+   ========================================== */
 .game-modal-content {
-  max-width: 700px;
-  max-height: 85vh;
+  max-width: 650px !important;
+  border-radius: 16px !important;
+  background-color: #16161a !important;
+  border: 1px solid #242629 !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(127, 90, 240, 0.15) !important;
+  padding: 24px !important;
+}
+
+#gameModalDetails {
+  max-height: 80vh;
   overflow-y: auto;
+  padding-right: 8px;
 }
 
-.game-modal-banner {
-  width: 100%;
-  height: 250px; 
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 16px;
+#gameModalDetails::-webkit-scrollbar {
+  width: 6px;
 }
 
-.game-modal-title {
-  font-size: 24px;
-  color: #fffffe;
-  margin-bottom: 12px;
+#gameModalDetails::-webkit-scrollbar-track {
+  background: #010101;
+  border-radius: 4px;
 }
 
-.game-modal-meta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
+#gameModalDetails::-webkit-scrollbar-thumb {
+  background: #7f5af0;
+  border-radius: 4px;
+}
+
+#gameModalDetails img {
+  width: 100% !important;
+  max-height: 300px !important;
+  object-fit: cover !important;
+  border-radius: 12px !important;
+  border: 1px solid #242629 !important;
+  margin-bottom: 16px !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+#gameModalDetails h2 {
+  font-size: 26px !important;
+  font-weight: 800 !important;
+  color: #fffffe !important;
+  margin-bottom: 12px !important;
+  letter-spacing: -0.5px;
+}
+
+#gameModalDetails p, 
+#gameModalDetails span {
   color: #94a1b2;
   font-size: 14px;
-}
-
-.game-modal-description {
   line-height: 1.6;
-  color: #fffffe;
-  font-size: 15px;
 }
 
-.clickable-card {
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.clickable-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-.clickable-card * {
-  pointer-events: none;
-}
-
-#gameModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(5px);
-  z-index: 10000;
-  justify-content: center;
-  align-items: center;
-}
-
-#gameModal.active {
-  display: flex !important;
-}
-
-.game-modal-content {
-  position: relative;
-  background-color: #16161a;
-  border: 1px solid #242629;
-  border-radius: 16px;
-  padding: 24px;
-  width: 90%;
-  max-width: 650px;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+#gameModalDetails strong {
+  color: #2cb67d;
+  font-weight: 600;
 }
 
 .game-modal-banner {
@@ -579,4 +632,29 @@ body{
   line-height: 1.6;
   color: #abd1c6;
   font-size: 15px;
+}
+
+/* ==========================================
+   7. АДАПТИВНІСТЬ
+   ========================================== */
+@media (max-width: 900px) {
+  .page-layout {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .filter-sidebar {
+    width: 100%;
+    position: static;
+  }
+
+  header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
 }

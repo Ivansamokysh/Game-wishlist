@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const gamesContainer = document.querySelector('.games-container');
   const searchInput = document.querySelector('.search-box input');
   
-  // Шукаємо чекбокси у відповідних блоках фільтрів
   const genreCheckboxes = document.querySelectorAll('.filters-group:nth-child(2) input[type="checkbox"]');
   const platformCheckboxes = document.querySelectorAll('.filters-group:nth-child(3) input[type="checkbox"]');
   const sortSelect = document.getElementById('sort-select');
@@ -36,10 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const searchQuery = searchInput ? searchInput.value.trim() : '';
+
+    const genreMap = {
+      'rpg': '5',
+      'action': '4',
+      'strategy': '10',
+      'shooter': '2',
+      'adventure': '3',
+      'puzzle': '7',
+      'sports': '15',
+      'racing': '1'
+    };
     
     const selectedGenres = Array.from(genreCheckboxes)
       .filter(cb => cb.checked)
-      .map(cb => cb.value.toLowerCase())
+      .map(cb => {
+        const val = cb.value.toLowerCase().trim();
+        return genreMap[val] || cb.value;
+      })
+      .filter(Boolean)
       .join(',');
 
     const selectedPlatforms = Array.from(platformCheckboxes)
@@ -279,7 +293,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Деталі гри (Modal)
   async function fetchGameDetails(gameId) {
     const gameModal = document.getElementById('gameModal');
     const modalDetails = document.getElementById('gameModalDetails');
