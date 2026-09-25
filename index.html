@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Wishlist</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -17,7 +16,6 @@
             <button class="btn btn-login">Log In</button>
             <button class="btn btn-signup">Sign up</button>
 
-            <!-- Блок профілю користувача після входу -->
             <div id="userProfile" class="user-profile" style="display: none;">
                 <span id="userName" class="user-name"></span>
                 <button id="dropdownToggle" class="dropdown-toggle">▼</button>
@@ -94,16 +92,14 @@
         </div>
     </div>
 
-    <!-- Модальне вікно деталей гри -->
     <div id="gameModal" class="modal-overlay">
-        <div class="game-modal-content">
+        <div class="modal-content game-modal-content">
             <span class="close-btn" data-close>&times;</span>
             <div id="gameModalDetails">
-                <!-- Контент гри буде завантажуватись сюди -->
             </div>
         </div>
     </div>
-
+    <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </body>
 </html>
