@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="star-item" data-value="4"><span class="star-icon">★</span><span class="star-num">4</span></div>
             <div class="star-item" data-value="5"><span class="star-icon">★</span><span class="star-num">5</span></div>
           </div>
-          <div class="rating-msg">Отзыв принят!</div>
+          <div class="rating-msg">Відгук прийнятий!</div>
         </div>
       `;
 
